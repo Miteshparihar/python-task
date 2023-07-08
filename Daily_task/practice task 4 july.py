@@ -22,19 +22,19 @@ print("One part is 9 wide by 7 long tiles.")
 print("Secand part is 5 wide by 7 long tiles ")
 print("How many tiles are needed")
 print("sum of total tiles:- 9+7+5+7")
-sum= 9+7+5+7
+sum= 9*7+5*7
 print("Total tiles:-",sum)
 #2.You buy 17 packages of tiles containing 6 tiles each. How many tiles will be left over?
 print("I buy 17 packages of tiles and containing 6 tiles each.")
 print("How many tiles will be left over:- ?")
 Package = 1*6
 print("1 package :",Package)
-print("Total tiles used:- 28")
+print("Total tiles used:- 98")
 buy = 17*6 # packagesbuy * Each tiles in packages
 print("Total tiles in 17 packages:-",buy)
 print("left over = Total tiles in 17 packages - Total tiles used")
-print("left over = 102 - 28")
-sub=buy-28
+print("left over = 102 - 98")
+sub=buy-98
 print("Tiles will be left over:-",sub)
 print("-----------------------------------------------------------------------------------------")
 #QUIZ : 3
