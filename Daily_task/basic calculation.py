@@ -1,0 +1,10 @@
+a=input("enter number :- ")
+b=input ("enter number :- ")
+print("Total:-",a+b)
+print("Total:-",a-b)
+print("Total:-",a*b)
+print("Total:-",a/b)
+print("Total:-",a%b)
+print("Total:-",a//b)
+print("Total:-",a**b)
+

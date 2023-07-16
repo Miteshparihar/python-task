@@ -23,7 +23,7 @@ print("Secand part is 5 wide by 7 long tiles ")
 print("How many tiles are needed")
 print("sum of total tiles:- 9+7+5+7")
 sum= 9*7+5*7
-print("Total tiles:-",sum)
+print("Total tiles needed:-",sum)
 #2.You buy 17 packages of tiles containing 6 tiles each. How many tiles will be left over?
 print("I buy 17 packages of tiles and containing 6 tiles each.")
 print("How many tiles will be left over:- ?")

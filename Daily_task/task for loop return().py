@@ -1,7 +1,7 @@
 #task 1=> print 1)Hello to 10)Hello.
-print("1) hello to 10)")
+print("task-1 print 1) hello to 10)")
 for a in range(1,11):
-    print(a,")Hello") #1) this symbol doubt
+    print(a,")","Hello") #1) this symbol doubt
 print("---------------------------------------------------------------------------------------------")
 #task 2 => print 99 to 1
 print("print 99 to 1")

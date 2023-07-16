@@ -1,0 +1,42 @@
+1
+1 1
+1 1 1 
+1 1 1 1
+
+1 
+1 0
+1 0 1
+1 0 1 0
+1 0 1 0 1
+
+1
+2 3
+4 5 6 
+7 8 9 10
+
+A
+B C
+D E F 
+G H I J 
+K L M N O
+
+task : 2
+take user input as number and print the output table :
+
+eg : 
+Enter num : 5
+
+print 5th table
+
+
+task : 3
+
+take user input as number and print tables upto the number 
+eg : 
+
+Enter num : 5
+
+print table from 1 to 5
+
+
+
