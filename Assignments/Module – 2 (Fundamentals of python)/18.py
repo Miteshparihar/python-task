@@ -2,13 +2,15 @@
 should be at least 3). If the given string already ends with 'ing' then add
 'ly' instead if the string length of the given string is less than 3, leave it
 unchanged. '''
-str1=str(input("enter a string:-"))
+str1=str(input("enter a character:-"))
 length=len(str1)
 if length>2:
     if str1[-3:]=='ing':
-        str1 +="ly"
+        str1 +='ly'
     else:
         str1 +="ing"
 print(str1)
-        
+
+
+
 
