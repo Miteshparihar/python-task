@@ -1,0 +1,58 @@
+{% extends 'dash_header.html' %}
+{% load static %}
+{% block content %}
+ <!-- dashboard inner -->
+ <div class="midde_cont">
+    <div class="container-fluid">
+       <div class="row column_title">
+          <div class="col-md-12">
+             <div class="page_title">
+                <h2>Invoice <small>(order history)</small></h2>
+             </div>
+          </div>
+       </div>
+       <!-- row -->
+       <div class="row">
+          <!-- invoice section -->
+          <div class="col-md-12">
+             <div class="white_shd full margin_bottom_30">
+                <div class="full graph_head">
+                   <div class="heading1 margin_0">
+                      <h2><i class="fa fa-file-text-o" ></i> History</h2>
+                   </div>
+                </div>
+                
+                <div class="full padding_infor_info">
+                   <div class="table_row">
+                      <div class="table-responsive">
+                         <table class="table table-striped">
+                            <thead>
+                               <tr>
+                                  <th>Sr.No</th>
+                                  <th>Order Id</th>
+                                  <th>Date</th>
+                                  <th>Amount</th>
+                               </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in trans %}
+                               <tr>
+                                  <td>{{i.pk}}</td>
+                                  <td>{{i.trans_id}}</td>
+                                  <td>{{i.date}}</td>
+                                  <td>{{i.grand_amount}}</td>
+                               </tr>
+                              {% endfor %}
+                            </tbody>
+                         </table>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       
+    </div>
+   
+ <!-- end dashboard inner -->
+{% endblock %}

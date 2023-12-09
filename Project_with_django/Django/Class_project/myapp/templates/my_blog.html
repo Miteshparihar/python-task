@@ -1,0 +1,56 @@
+{% extends 'farmer_header.html'%}
+{% load static %}
+{% block content %}
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area">
+        <!-- Top Breadcrumb Area -->
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url({% static 'img/bg-img/24.jpg' %});">
+            <h2>BLOG DEFAULT</h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Blog Area Start ##### -->
+    <section class="alazea-blog-area mb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-8">
+                    <div class="row">
+
+                        <!-- Single Blog Post Area -->
+                        {% for i in blogs %}
+                        <div>
+                            <div class="single-blog-post mb-50">
+                                <div class="post-thumbnail mb-30">
+                                 <img src="{{i.blog_img.url}}" style="height:250px;" alt="">
+                                </div>
+                                <div class="post-content">
+
+                                        <h5>{{i.blog_title}}</h5>
+                                  
+                                    <p class="post-excerpt">{{i.desc}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Blog Area End ##### -->
+{% endblock %}

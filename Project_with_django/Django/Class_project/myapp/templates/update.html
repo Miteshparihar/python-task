@@ -1,0 +1,61 @@
+{% extends 'farmer_header.html'%}
+{% load static %}
+{% block content %}
+<div class="breadcrumb-area">
+  <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url({% static 'img/bg-img/24.jpg'%});">
+      <h2>Update product</h2>
+  </div>
+  
+  <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">About</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+  </div>
+<div class="container mt-3">
+  {% if done %}
+      <h3 style="color:green; text-align: center;">{{done}}</h3>
+  {% else %}
+      <h3 style="color:red; text-align: center;">{{error}}</h3>
+  {% endif %}
+    <h2>Update product</h2>
+    <form action="{% url 'update' pk=product.pk %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3 mt-3">
+        <label for="name">product Name:</label>
+        <input type="text" class="form-control" id="p_name" placeholder="Enter product name" name="p_name" value="{{product.pname}}">
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="email">Product Price:</label>
+        <input type="text" class="form-control" id="price" placeholder="Enter price" value="{{product.price}}" name="p_price">
+      </div>
+      <div class="mb-3">
+        <label for="pwd">Product image</label>
+        <input type="file" value="{{product.p_img.url}}" class="form-control" id="pwd" placeholder="" name="p_img">
+        <img src="{{product.p_img.url}}" style="height:200px;" alt="">
+      </div>
+      <div class="mb-3">
+        <label for="number">Product stock:</label>
+        <input type="text" class="form-control" id="pwd" placeholder="Enter stock" value="{{product.p_stock}}" name="p_stock">
+      </div>
+      <div class="mb-3">
+        <label for="address">Product Description:</label>
+       <textarea class="form-control" name="p_des" id="" cols="20" rows="10"placeholder="Enter product description" >{{product.description}}</textarea>   
+      </div>
+      <div class="form-check mb-3">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" name="remember"> Remember me
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary" name="add">Update detail </button>
+    </form>
+  </div>
+  <br>
+{% endblock %}

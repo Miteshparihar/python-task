@@ -1,0 +1,106 @@
+{% extends 'header.html'%}
+{% load static %}
+{% block content %}
+ <!-- ##### Breadcrumb Area Start ##### -->
+ <div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url({% static 'img/bg-img/24.jpg' %});">
+        <h2>My wishlist</h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">My wishlist</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+
+<!-- ##### Single Product Details Area Start ##### -->
+<section class="single_product_details_area mb-50">
+    <div class="produts-details--content mb-50">
+        <div class="container">
+            {% if request.session.wishlist_count %} 
+            <div>
+                <h1 style="color:green;">
+                    Our products
+                </h1>
+            </div>
+            <div class="row justify-content-between">
+                 {% for i in wishlist %}
+                <div class="col-12 col-md-6 col-lg-5">
+                    <div class="single_product_thumb">
+                        <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <br>
+                                <br>
+                                <div class="carousel-item active">
+                                    <a class="product-img" href="{{i.product.p_img.url}}" title="Product Image">
+                                    <img class="d-block w-100" src="{{i.product.p_img.url}}" alt="1" style="height:350px; width: auto;">
+                                </a>
+                                </div>
+                                <!-- <div class="carousel-item">
+                                    <a class="product-img" href="{% static 'img/bg-img/49.jpg' %}" title="Product Image">
+                                    <img class="d-block w-100" src="{% static 'img/bg-img/49.jpg'%}" alt="1">
+                                </a>
+                                </div>
+                                <div class="carousel-item">
+                                    <a class="product-img" href="{% static 'img/bg-img/49.jpg' %}" title="Product Image">
+                                    <img class="d-block w-100" src="{% static 'img/bg-img/49.jpg'%}" alt="1">
+                                </a>
+                                </div> -->
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                 
+                <div class="col-12 col-md-6">
+                    <br>
+                    <br>
+                    <div class="single_product_desc">
+                        <h4 class="title">{{i.product.pname}}</h4>
+                        <h4 class="price">{{i.product.price}}₹</h4>
+                        <div class="products--meta">
+                            <p><span>SKU:</span> <span>CT201807</span></p>
+                            <p><span>Category:</span> <span>{{i.product.category}}</span></p>
+                            <p>
+                                <span>Share on:</span>
+                                <span>
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                            </span>
+                            </p>
+                            <a href="{% url 'remove_wishlist' pk=i.product.pk%}"><input style="height:35px; width:220px;font-size: 20px;border: none; outline: none; background-color:red; border-radius: 20px;" type="submit" class="btn-primary" name="" id="" value="Remove from wishlist"></a>
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div>
+                <h1 style="color: red;">
+                    Ooops...
+                </h1>
+                <h1 style="color: red;">
+                    No Wishlist found !!
+                </h1>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+   
+</section>
+<!-- ##### Single Product Details Area End ##### -->
+{% endblock%}

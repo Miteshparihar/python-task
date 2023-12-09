@@ -1,0 +1,164 @@
+{% extends 'header.html'%}
+{% load static %}
+{% block content %}
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
+        style="background-image: url({% static 'img/bg-img/24.jpg' %});">
+        <h2>My cart</h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">My cart</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+
+<!-- ##### Single Product Details Area Start ##### -->
+<section class="single_product_details_area mb-50">
+    <div class="produts-details--content mb-50">
+        <div class="container">
+            {% if request.session.cart_count %}
+            <div>
+                <h1 style="color:green;">
+                    Our products
+                </h1>
+            </div>
+            <div class="row justify-content-between">
+                {% for i in cart %}
+                <div class="col-12 col-md-6 col-lg-5">
+                    <div class="single_product_thumb">
+                        <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <br>
+                                <br>
+                                <div class="carousel-item active">
+                                    <a class="product-img" href="{{i.product.p_img.url}}" title="Product Image">
+                                        <img class="d-block w-100" src="{{i.product.p_img.url}}" alt="1"
+                                            style="height:350px; width: auto;">
+                                    </a>
+                                </div>
+                                <!-- <div class="carousel-item">
+                                    <a class="product-img" href="{% static 'img/bg-img/49.jpg' %}" title="Product Image">
+                                    <img class="d-block w-100" src="{% static 'img/bg-img/49.jpg'%}" alt="1">
+                                </a>
+                                </div>
+                                <div class="carousel-item">
+                                    <a class="product-img" href="{% static 'img/bg-img/49.jpg' %}" title="Product Image">
+                                    <img class="d-block w-100" src="{% static 'img/bg-img/49.jpg'%}" alt="1">
+                                </a>
+                                </div> -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <br>
+                    <br>
+                    <div class="single_product_desc">
+                        <h4 class="title">{{i.product.pname}}</h4>
+                        <h4 class="price">{{i.product.price}}₹</h4>
+                        <div class="products--meta">
+                            <p><span>SKU:</span> <span>CT201807</span></p>
+                            <p><span>Category:</span> <span>{{i.product.category}}</span></p>
+                            <p>
+                                <span>Share on:</span>
+                                <span>
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                </span>
+                            </p>
+                            <form action="{% url 'change_qty' pk=i.product.pk %}" method="post">
+                                {% csrf_token %}
+                                <div class="form-outline" style="width:22rem;">
+                                    <input type="number" name="qty" value="{{i.qty}}" min="1" max="50000000" id="typeNumber"
+                                        class="form-control" onchange="this.form.submit()">
+                                </div>
+
+                            </form>
+                            <br>
+                            <h4 class="price">Total price:- {{i.total}}₹</h4>
+
+                            <a href="{% url 'remove_cart' pk=i.product.pk%}"><input
+                                    style="height:35px; width:220px;font-size: 20px;border: none; outline: none; background-color:red; border-radius: 20px;"
+                                    type="submit" class="btn-primary" name="" id="" value="Remove from cart"></a>
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <h4 class="price">Total payable Amount:-{{net_price}}₹</h4><br>
+            <a href="#"><input
+                style="height:35px; width:220px;font-size: 20px;border: none; outline: none; background-color:green; border-radius: 20px;"
+                type="submit" class="btn-primary" name="" id="rzp-button1" value="Buy"></a>
+            {% else %}
+            <div>
+                <h1 style="color: red;">
+                    Ooops...
+                </h1>
+                <h1 style="color: red;">
+                    No Cart found !!
+                </h1>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+</section>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "rzp_test_q2Q8wCXa4JPNYY", // Enter the Key ID generated from the Dashboard
+    "amount": "{{total}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Garderner",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": "{{cart.razorpay_order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature)
+
+        window.location.href=`http://localhost:8000/cart/success?razorpay_payment_id=${response.razorpay_payment_id}&razorpay_order_id=${response.razorpay_order_id}&razorpay_signature=${response.razorpay_signature}`
+    },
+    "prefill": {
+        "name": "Garderner App Payment",
+        "email": "garderner.tops@gmail.com",
+        "contact": "9000090000"
+
+        
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+{% endblock%}

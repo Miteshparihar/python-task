@@ -1,0 +1,91 @@
+{% extends 'header.html'%}
+{% load static %}
+{% block content %}
+<div class="breadcrumb-area">
+  <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url({% static 'img/bg-img/24.jpg'%});">
+      <h2>Sign up </h2>
+  </div>
+  
+  <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">About</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+  </div>
+<div class="container mt-3">
+  {% if done %}
+      <h3 style="color:green; text-align: center;">{{done}}</h3>
+  {% else %}
+      <h3 style="color:red; text-align: center;">{{error}}</h3>
+  {% endif %}
+    <h2>Sign up</h2>
+    <form action="{% url 'sign'%}" method="post">
+      {% csrf_token %}
+      <div class="mb-3 mt-3">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="email" placeholder="Enter name" name="name">
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email_validation" placeholder="Enter email" name="email">
+        <span id="email_error" style="color:red;"></span>
+      </div>
+      <div class="mb-3">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+      </div>
+      <div class="mb-3">
+        <label for="number">Mobile:</label>
+        <input type="tel" class="form-control" id="pwd" placeholder="Enter your number" name="mobile">
+      </div>
+      <div class="mb-3">
+        <select name="usertype" id="">
+          <option value="null">---user type---</option>
+          <option value="farmer">farmer</option>
+          <option value="customer">customer</option>
+          <option value="delivery_boy">delivery boy</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="address">Address:</label>
+       <textarea class="form-control" name="address" id="" cols="30" rows="10" placeholder="Enter your address" ></textarea>   
+      </div>
+      <div class="form-check mb-3">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" name="remember"> Remember me
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary" name="signUp">signUp</button>
+    </form>
+  </div>
+  <br>
+  <script>
+        
+    $("#email_validation").change(function(){
+      var email=$(this).val();
+
+      $.ajax({
+        url: '/ajax/ajax_validation/',
+        data: {'email':email},
+        datatype: 'json',
+        success: function (data){
+          if (data.is_taken) {
+            document.getElementById("email_error").innerHTML="This Email ID is Already Exist"
+          }
+          else{
+            
+            /*Nothing to do just normal course of program*/
+          }
+        }
+      });
+    });
+
+</script>
+{% endblock %}
