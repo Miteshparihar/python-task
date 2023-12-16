@@ -1,15 +1,4 @@
-# >>>>>>>>>>>>>>>>>>>>>>>>>>Advance Assesment
-import mysql.connector
-
-#>>>>>>>>>>>>>>>>>>>>>>>>>>>database connectivity
-def connection():
-
-    return mysql.connector.connect(
-        user="root",
-        host="localhost",
-        password="",
-        database="pharmacy")
-#>>>>>>>>>>>>>>>>>>>>>>>>>>>>class creation
+from data import connection
 class Admin:
     def register(self):
         print(">>>>>>>>>>>>>>>>>>>>>>>>>Register")
@@ -32,7 +21,9 @@ class Admin:
             query = "select * from manager " 
             cursor.execute(query)
             row=cursor.fetchall()
-            print("All Manager Data  :- ",row)
+            print("ID           Name           Shop ")
+            for i in row:
+                print(f"{i[0]}          {i[1]}           {i[2]}")
             con.commit()
             con.close()
     def view_medicine(self):
@@ -43,7 +34,10 @@ class Admin:
             query = "select * from medicine " 
             cursor.execute(query)
             row=cursor.fetchall()
-            print("All medicine Data  :- ",row)
+            print("medicine              Qty               Date               Who Added           price ")
+            for i in row :
+                print(f'{i[0]}          {i[1]}              {i[2]}                {i[3]}                    {i[4]}')
+            #print("All medicine Data  :- ",row)
             con.commit()
             con.close()
         else:
@@ -152,4 +146,5 @@ elif choice=='2':
     pmanager.delete_medicine()
 else:
     print("Incorrect select valid !!!")
+
 
