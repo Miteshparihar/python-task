@@ -81,7 +81,7 @@ def login(request):
                 return render(request,'farmer_home.html')
             else:
                 return render(request,'index.html')
-        except:
+        except: 
             msg="Your email or password is not match !!!!"
             return render(request,'login.html',{'error': msg})
     else:
